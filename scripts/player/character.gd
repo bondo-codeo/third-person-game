@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 
 var direction = Vector3.ZERO
-
+var lerpSpeed = 20
 @export var walkSpeed = 5
 @export var jumpVelocity = 4
 @export var mouseSensitivity = .3
@@ -24,8 +24,8 @@ func _physics_process(delta):
 	applyGravity(delta)
 	jump()
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
-	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	walk(direction)
+	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), lerpSpeed * delta)
+	walk(direction, delta)
 	move_and_slide()
 
 func applyGravity(delta):
@@ -34,11 +34,11 @@ func applyGravity(delta):
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jumpVelocity
-func walk(dir):
+func walk(dir, delta):
 	if dir:
 		velocity.x = dir.x * walkSpeed
 		velocity.z = dir.z * walkSpeed
 	else:
-		velocity.x = move_toward(velocity.x, 0, walkSpeed)
-		velocity.z = move_toward(velocity.z, 0, walkSpeed)
-##test
+		velocity.x = lerp(velocity.x, 0.0, lerpSpeed * delta)
+		velocity.z = lerp(velocity.z, 0.0, lerpSpeed * delta)
+
