@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://bj2wpga34duo1"]
 
-[ext_resource type="Texture2D" uid="uid://bec5hfrq5aqot" path="res://icon.svg" id="1_7b8f5"]
-[ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://character.tscn" id="2_nnhd6"]
+[ext_resource type="Texture2D" uid="uid://bec5hfrq5aqot" path="res://icon.svg" id="1_nspa0"]
+[ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://player assets/character.tscn" id="2_b8trg"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jj8eb"]
-panorama = ExtResource("1_7b8f5")
+panorama = ExtResource("1_nspa0")
 
 [sub_resource type="Sky" id="Sky_o60mu"]
 sky_material = SubResource("PanoramaSkyMaterial_jj8eb")
@@ -53,5 +53,5 @@ transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.159
 mesh = SubResource("CylinderMesh_hop3o")
 material = SubResource("StandardMaterial3D_g1ou1")
 
-[node name="character" parent="." instance=ExtResource("2_nnhd6")]
+[node name="character" parent="." instance=ExtResource("2_b8trg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.13933, 5.66488)
