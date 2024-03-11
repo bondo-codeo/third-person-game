@@ -1,3 +1,52 @@
-[gd_scene format=3 uid="uid://bj2wpga34duo1"]
+[gd_scene load_steps=8 format=3 uid="uid://bj2wpga34duo1"]
+
+[ext_resource type="Texture2D" uid="uid://bec5hfrq5aqot" path="res://icon.svg" id="1_7b8f5"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jj8eb"]
+panorama = ExtResource("1_7b8f5")
+
+[sub_resource type="Sky" id="Sky_o60mu"]
+sky_material = SubResource("PanoramaSkyMaterial_jj8eb")
+
+[sub_resource type="Environment" id="Environment_yf047"]
+background_mode = 2
+sky = SubResource("Sky_o60mu")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxohr"]
+albedo_color = Color(0.905882, 0.654902, 0.556863, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hop3o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1ou1"]
+albedo_color = Color(1, 1, 0.305882, 1)
 
 [node name="world" type="Node3D"]
+
+[node name="environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="environment"]
+environment = SubResource("Environment_yf047")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="environment"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="boxes" type="Node3D" parent="."]
+
+[node name="box" type="CSGBox3D" parent="boxes"]
+transform = Transform3D(2.2, 0, 0, 0, 0.175633, 0, 0, 0, 2.3, 0, 0, 0)
+use_collision = true
+size = Vector3(2.70142, 1, 2.90918)
+material = SubResource("StandardMaterial3D_kxohr")
+
+[node name="cylinder test" type="CSGMesh3D" parent="boxes"]
+transform = Transform3D(2.05354, 0, 0, 0, -4.38509e-08, 1.00319, 0, -1.00319, -4.38509e-08, 0.158124, -0.0249054, 0)
+mesh = SubResource("CylinderMesh_hop3o")
+material = SubResource("StandardMaterial3D_g1ou1")
+
+[node name="cylinder test2" type="CSGMesh3D" parent="boxes"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.15995, -0.47869, -0.088478)
+mesh = SubResource("CylinderMesh_hop3o")
+material = SubResource("StandardMaterial3D_g1ou1")
