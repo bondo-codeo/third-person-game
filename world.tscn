@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj2wpga34duo1"]
+[gd_scene load_steps=9 format=3 uid="uid://bj2wpga34duo1"]
 
 [ext_resource type="Texture2D" uid="uid://bec5hfrq5aqot" path="res://icon.svg" id="1_7b8f5"]
+[ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://character.tscn" id="2_nnhd6"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jj8eb"]
 panorama = ExtResource("1_7b8f5")
@@ -34,6 +35,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="boxes" type="Node3D" parent="."]
+transform = Transform3D(2.95401, 0, 0, 0, 2.39799, 0, 0, 0, 2.62333, 0, 0, 0)
 
 [node name="box" type="CSGBox3D" parent="boxes"]
 transform = Transform3D(2.2, 0, 0, 0, 0.175633, 0, 0, 0, 2.3, 0, 0, 0)
@@ -42,7 +44,7 @@ size = Vector3(2.70142, 1, 2.90918)
 material = SubResource("StandardMaterial3D_kxohr")
 
 [node name="cylinder test" type="CSGMesh3D" parent="boxes"]
-transform = Transform3D(2.05354, 0, 0, 0, -4.38509e-08, 1.00319, 0, -1.00319, -4.38509e-08, 0.158124, -0.0249054, 0)
+transform = Transform3D(2.29661, 0, 0, 0, -4.38509e-08, 0.829044, 0, -1.00319, -3.62387e-08, 0.158124, -0.0249054, 0)
 mesh = SubResource("CylinderMesh_hop3o")
 material = SubResource("StandardMaterial3D_g1ou1")
 
@@ -50,3 +52,6 @@ material = SubResource("StandardMaterial3D_g1ou1")
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.15995, -0.47869, -0.088478)
 mesh = SubResource("CylinderMesh_hop3o")
 material = SubResource("StandardMaterial3D_g1ou1")
+
+[node name="character" parent="." instance=ExtResource("2_nnhd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.13933, 5.66488)
