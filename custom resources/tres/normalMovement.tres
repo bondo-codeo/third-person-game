@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="playerMovementData" load_steps=2 format=3 uid="uid://dke513kobsbh3"]
+
+[ext_resource type="Script" path="res://custom resources/scripts/playerMovementData.gd" id="1_0ojbi"]
+
+[resource]
+script = ExtResource("1_0ojbi")
+walkSpeed = 5
+jumpVelocity = 4
+lerpDrag = 20

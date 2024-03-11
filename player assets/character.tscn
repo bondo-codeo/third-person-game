@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx8df2xm2muud"]
+[gd_scene load_steps=6 format=3 uid="uid://cx8df2xm2muud"]
 
 [ext_resource type="Script" path="res://scripts/player/character.gd" id="1_etjqj"]
+[ext_resource type="Resource" uid="uid://dke513kobsbh3" path="res://custom resources/tres/normalMovement.tres" id="2_efgkx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_trh88"]
 
@@ -14,6 +15,7 @@ material = SubResource("StandardMaterial3D_el34h")
 [node name="character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_etjqj")
+normalMovement = ExtResource("2_efgkx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_trh88")

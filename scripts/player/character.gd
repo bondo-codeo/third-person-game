@@ -1,10 +1,8 @@
 extends CharacterBody3D
 
+@export var normalMovement : playerMovementData
 
 var direction = Vector3.ZERO
-var lerpSpeed = 20
-@export var walkSpeed = 5
-@export var jumpVelocity = 4
 @export var mouseSensitivity = .3
 
 @onready var head = $head
@@ -13,7 +11,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
+	 
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(event.relative.x * mouseSensitivity * -1))
@@ -24,7 +22,7 @@ func _physics_process(delta):
 	applyGravity(delta)
 	jump()
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
-	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), lerpSpeed * delta)
+	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), normalMovement.lerpDrag * delta)
 	walk(direction, delta)
 	move_and_slide()
 
@@ -33,12 +31,12 @@ func applyGravity(delta):
 		velocity.y -= gravity * delta
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jumpVelocity
+		velocity.y = normalMovement.jumpVelocity
 func walk(dir, delta):
 	if dir:
-		velocity.x = dir.x * walkSpeed
-		velocity.z = dir.z * walkSpeed
+		velocity.x = dir.x * normalMovement.walkSpeed
+		velocity.z = dir.z * normalMovement.walkSpeed
 	else:
-		velocity.x = lerp(velocity.x, 0.0, lerpSpeed * delta)
-		velocity.z = lerp(velocity.z, 0.0, lerpSpeed * delta)
+		velocity.x = lerp(velocity.x, 0.0, normalMovement.lerpDrag * delta)
+		velocity.z = lerp(velocity.z, 0.0, normalMovement.lerpDrag * delta)
 
