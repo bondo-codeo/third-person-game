@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bj2wpga34duo1"]
+[gd_scene load_steps=10 format=3 uid="uid://bj2wpga34duo1"]
 
-[ext_resource type="Texture2D" uid="uid://bec5hfrq5aqot" path="res://icon.svg" id="1_nspa0"]
+[ext_resource type="Texture2D" uid="uid://rji2tphxi5ny" path="res://defTexture.png" id="1_h8odj"]
+[ext_resource type="Script" path="res://scripts/world/world.gd" id="1_tjvnd"]
 [ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://player assets/character.tscn" id="2_b8trg"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jj8eb"]
-panorama = ExtResource("1_nspa0")
+panorama = ExtResource("1_h8odj")
 
 [sub_resource type="Sky" id="Sky_o60mu"]
 sky_material = SubResource("PanoramaSkyMaterial_jj8eb")
@@ -24,32 +25,35 @@ albedo_color = Color(0.905882, 0.654902, 0.556863, 1)
 albedo_color = Color(1, 1, 0.305882, 1)
 
 [node name="world" type="Node3D"]
+script = ExtResource("1_tjvnd")
 
-[node name="environment" type="Node3D" parent="."]
+[node name="env" type="Node3D" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="environment"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
 environment = SubResource("Environment_yf047")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="environment"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="boxes" type="Node3D" parent="."]
+[node name="stage" type="Node3D" parent="."]
 transform = Transform3D(2.95401, 0, 0, 0, 2.39799, 0, 0, 0, 2.62333, 0, 0, 0)
 
-[node name="box" type="CSGBox3D" parent="boxes"]
+[node name="box" type="CSGBox3D" parent="stage"]
 transform = Transform3D(2.2, 0, 0, 0, 0.175633, 0, 0, 0, 2.3, 0, 0, 0)
 use_collision = true
 size = Vector3(2.70142, 1, 2.90918)
 material = SubResource("StandardMaterial3D_kxohr")
 
-[node name="cylinder test" type="CSGMesh3D" parent="boxes"]
+[node name="cylinder test" type="CSGMesh3D" parent="stage"]
 transform = Transform3D(2.29661, 0, 0, 0, -4.38509e-08, 0.829044, 0, -1.00319, -3.62387e-08, 0.158124, -0.0249054, 0)
+use_collision = true
 mesh = SubResource("CylinderMesh_hop3o")
 material = SubResource("StandardMaterial3D_g1ou1")
 
-[node name="cylinder test2" type="CSGMesh3D" parent="boxes"]
+[node name="cylinder test2" type="CSGMesh3D" parent="stage"]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.15995, -0.47869, -0.088478)
+use_collision = true
 mesh = SubResource("CylinderMesh_hop3o")
 material = SubResource("StandardMaterial3D_g1ou1")
 
