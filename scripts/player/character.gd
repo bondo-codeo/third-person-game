@@ -41,3 +41,4 @@ func walk(dir):
 	else:
 		velocity.x = move_toward(velocity.x, 0, walkSpeed)
 		velocity.z = move_toward(velocity.z, 0, walkSpeed)
+##test
