@@ -14,6 +14,18 @@ config/name="First person controller"
 run/main_scene="res://world scenes/world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
+[file_customization]
+
+folder_colors={
+"res://custom resources/": "green",
+"res://custom resources/scripts/": "red",
+"res://player assets/": "blue",
+"res://player scenes/": "yellow",
+"res://scripts/": "red",
+"res://world assets/": "blue",
+"res://world scenes/": "yellow"
+}
+
 [input]
 
 forward={
