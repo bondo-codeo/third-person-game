@@ -14,6 +14,10 @@ config/name="First person controller"
 run/main_scene="res://world scenes/world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
+[autoload]
+
+PlayerStateMachineManager="*res://playerStateMachine/player_state_machine_manager.gd"
+
 [file_customization]
 
 folder_colors={
@@ -21,6 +25,7 @@ folder_colors={
 "res://custom resources/scripts/": "red",
 "res://player assets/": "blue",
 "res://player scenes/": "yellow",
+"res://playerStateMachine/": "pink",
 "res://scripts/": "red",
 "res://world assets/": "blue",
 "res://world scenes/": "yellow"
