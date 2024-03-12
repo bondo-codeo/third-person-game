@@ -6,4 +6,4 @@
 script = ExtResource("1_0ojbi")
 walkSpeed = 5
 jumpVelocity = 4
-lerpDrag = 20
+lerpDrag = 15
