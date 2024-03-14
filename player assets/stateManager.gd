@@ -6,6 +6,7 @@ enum airStates {onGround, jumping, falling}
 var state = groundStates.idle
 
 func _physics_process(delta):
+	#crouching()
 	idle()
 	walking()
 	running()
@@ -15,18 +16,19 @@ func changeState(newState):
 	state = newState
 
 func idle():
-	if Input.is_action_pressed("forward"):
+	if Input.is_action_pressed("forward") and not Input.is_action_pressed("crouch"):
 		changeState(groundStates.walking)
 
 func walking():
-	if Input.is_action_pressed("run"):
+	if Input.is_action_pressed("run") and not Input.is_action_pressed("crouch"):
 		changeState(groundStates.running)
-	if !Input.is_action_pressed("forward"):
+	if not Input.is_action_pressed("forward"):
 		changeState(groundStates.idle)
 
 func running():
-	if Input.is_action_just_released("run"):
+	if Input.is_action_just_released("run") and state == groundStates.running:
 		changeState(groundStates.walking)
 
-func crouching():
-	print("crouch")
+#func crouching():
+	#if Input.is_action_pressed("crouch"):
+		#changeState(groundStates.crouching)
