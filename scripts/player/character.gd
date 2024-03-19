@@ -38,8 +38,7 @@ func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = normalMovement.jumpVelocity
 
-		
-		
+
 func movement(dir, delta):
 	if stateManager.state == stateManager.groundStates.idle:
 		velocity.x = lerp(velocity.x, 0.0, normalMovement.lerpDrag * delta)
