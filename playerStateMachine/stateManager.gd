@@ -16,6 +16,7 @@ func _physics_process(delta):
 	walking()
 	running()
 	crouchCheck()
+	goIdle()
 	sliding(delta)
 	
 func changeState(newState):
@@ -24,15 +25,14 @@ func changeState(newState):
 func idle():
 	if Input.is_action_pressed("crouch") and not state == groundStates.sliding:
 		changeState(groundStates.crouching)
-	elif Input.is_action_pressed("forward") and not Input.is_action_pressed("crouch") and not state == groundStates.sliding:
-		changeState(groundStates.walking)
+	elif Input.is_action_pressed("forward") or Input.is_action_pressed("backward") or Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+		if not Input.is_action_pressed("crouch") and not state == groundStates.sliding:
+			changeState(groundStates.walking)
 func walking():
 	if Input.is_action_pressed("crouch") and not state == groundStates.sliding:
 		changeState(groundStates.crouching) 
 	elif Input.is_action_pressed("run") and not Input.is_action_pressed("crouch") and not state == groundStates.sliding:
 		changeState(groundStates.running)
-	elif not Input.is_action_pressed("forward") and not state == groundStates.sliding:
-		changeState(groundStates.idle)
 
 func running():
 	if Input.is_action_pressed("crouch") and not state == groundStates.sliding:
@@ -50,3 +50,12 @@ func sliding(delta):
 func crouchCheck():
 	if crouchCast.is_colliding() and not state == groundStates.sliding:
 		changeState(groundStates.crouching)
+func goIdle():
+	if not Input.is_action_pressed("crouch") and not Input.is_action_pressed("forward") and not Input.is_action_pressed("backward") and not Input.is_action_pressed("left") and not Input.is_action_pressed("right") and not state == groundStates.sliding:
+		changeState(groundStates.idle)
+		#if not Input.is_action_pressed("forward"):
+			#if not Input.is_action_pressed("backward"):
+				#if not Input.is_action_pressed("left"):
+					#if not Input.is_action_pressed("right"):
+						#if not state == groundStates.sliding:
+							#changeState(groundStates.idle)

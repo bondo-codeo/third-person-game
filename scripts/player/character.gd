@@ -51,3 +51,6 @@ func movement(dir, delta):
 	if stateManager.state == stateManager.groundStates.running:
 		velocity.x = dir.x * normalMovement.runSpeed
 		velocity.z = dir.z * normalMovement.runSpeed
+	if stateManager.state == stateManager.groundStates.crouching:
+		velocity.x = dir.x * normalMovement.crouchSpeed
+		velocity.z = dir.z * normalMovement.crouchSpeed
