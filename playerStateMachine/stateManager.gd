@@ -24,15 +24,16 @@ func changeState(newState):
 func idle():
 	if Input.is_action_pressed("crouch") and not state == groundStates.sliding:
 		changeState(groundStates.crouching)
-	elif Input.is_action_pressed("forward") and not Input.is_action_pressed("crouch") and not state == groundStates.sliding:
+	elif Input.is_action_pressed("forward"):
 		changeState(groundStates.walking)
 func walking():
 	if Input.is_action_pressed("crouch") and not state == groundStates.sliding:
 		changeState(groundStates.crouching) 
-	elif Input.is_action_pressed("run") and not Input.is_action_pressed("crouch") and not state == groundStates.sliding:
+	elif Input.is_action_pressed("run") and not Input.is_action_pressed("crouch") and not state == groundStates.sliding and not state==groundStates.idle:
 		changeState(groundStates.running)
-	elif not Input.is_action_pressed("forward") and not state == groundStates.sliding:
-		changeState(groundStates.idle)
+	elif not Input.is_action_pressed("forward"):
+		if not state == groundStates.sliding:
+			changeState(groundStates.idle)
 
 func running():
 	if Input.is_action_pressed("crouch") and not state == groundStates.sliding:
