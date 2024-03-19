@@ -40,8 +40,7 @@ func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = normalMovement.jumpVelocity
 
-		
-		
+
 func movement(dir, delta):
 	if stateManager.state == stateManager.groundStates.idle:
 		velocity.x = lerp(velocity.x, 0.0, normalMovement.lerpDrag * delta)
@@ -60,8 +59,10 @@ func movement(dir, delta):
 		velocity.z = dir.z * normalMovement.runSpeed
 		standingCol.disabled = false
 		crouchingCol.disabled = true
+    
 	if stateManager.state == stateManager.groundStates.crouching:
 		velocity.x = dir.x * normalMovement.crouchSpeed
 		velocity.z = dir.z * normalMovement.crouchSpeed
 		standingCol.disabled = true
 		crouchingCol.disabled = false
+
