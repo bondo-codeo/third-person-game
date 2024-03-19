@@ -9,6 +9,9 @@ var direction = Vector3.ZERO
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@onready var stateManager = $stateManager
+
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	 
@@ -23,8 +26,10 @@ func _physics_process(delta):
 	jump()
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), normalMovement.lerpDrag * delta)
-	walk(direction, delta)
+	
+	movement(direction, delta)
 	move_and_slide()
+	print(stateManager.state)
 
 func applyGravity(delta):
 	if not is_on_floor():
@@ -32,11 +37,18 @@ func applyGravity(delta):
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = normalMovement.jumpVelocity
-func walk(dir, delta):
-	if dir:
-		velocity.x = dir.x * normalMovement.walkSpeed
-		velocity.z = dir.z * normalMovement.walkSpeed
-	else:
+
+		
+		
+func movement(dir, delta):
+	if stateManager.state == stateManager.groundStates.idle:
 		velocity.x = lerp(velocity.x, 0.0, normalMovement.lerpDrag * delta)
 		velocity.z = lerp(velocity.z, 0.0, normalMovement.lerpDrag * delta)
-
+	
+	if stateManager.state == stateManager.groundStates.walking:
+		velocity.x = dir.x * normalMovement.walkSpeed
+		velocity.z = dir.z * normalMovement.walkSpeed
+	
+	if stateManager.state == stateManager.groundStates.running:
+		velocity.x = dir.x * normalMovement.runSpeed
+		velocity.z = dir.z * normalMovement.runSpeed
