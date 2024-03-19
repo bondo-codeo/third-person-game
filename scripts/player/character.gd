@@ -8,11 +8,22 @@ var direction = Vector3.ZERO
 @export var mouseSensitivity = .3
 
 @onready var head = $head
+@onready var camera = $head/Camera3D
+
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var stateManager = $stateManager
 
+var standHeight = 0.5
+var crouchHeight = -0.1
+
+var idleFov = 75.0
+var walkingFov = 80.0
+var runningFov = 85.0
+var slidingFov = 90.0
+var crouchingFov = 70.0
+var cameraLerp = 0.5
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -30,8 +41,9 @@ func _physics_process(delta):
 	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), normalMovement.lerpDrag * delta)
 	
 	movement(direction, delta)
+	cameraManagement()
 	move_and_slide()
-	print(stateManager.state)
+	print(camera.fov)
 
 func applyGravity(delta):
 	if not is_on_floor():
@@ -65,4 +77,9 @@ func movement(dir, delta):
 		velocity.z = dir.z * normalMovement.crouchSpeed
 		standingCol.disabled = true
 		crouchingCol.disabled = false
-
+	
+func cameraManagement():
+	if stateManager.state == stateManager.groundStates.crouching or stateManager.state == stateManager.groundStates.sliding:
+		head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
+	elif not stateManager.state == stateManager.groundStates.crouching or stateManager.state == stateManager.groundStates.sliding:
+		head.position.y = lerp(head.position.y, standHeight, cameraLerp)

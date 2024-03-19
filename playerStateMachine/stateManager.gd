@@ -56,5 +56,5 @@ func crouchCheck():
 	if crouchCast.is_colliding() and not state == groundStates.sliding:
 		changeState(groundStates.crouching)
 func goIdle():
-	if not Input.is_action_pressed("crouch") and not Input.is_action_pressed("forward") and not Input.is_action_pressed("backward") and not Input.is_action_pressed("left") and not Input.is_action_pressed("right") and not state == groundStates.sliding:
+	if not Input.is_action_pressed("crouch") and not Input.is_action_pressed("forward") and not Input.is_action_pressed("backward") and not Input.is_action_pressed("left") and not Input.is_action_pressed("right") and not state == groundStates.sliding and not crouchCast.is_colliding():
 		changeState(groundStates.idle)
