@@ -42,6 +42,7 @@ func _physics_process(delta):
 	
 	movement(direction, delta)
 	cameraManagement()
+	colManagement()
 	move_and_slide()
 	print(camera.fov)
 
@@ -57,29 +58,40 @@ func movement(dir, delta):
 	if stateManager.state == stateManager.groundStates.idle:
 		velocity.x = lerp(velocity.x, 0.0, normalMovement.lerpDrag * delta)
 		velocity.z = lerp(velocity.z, 0.0, normalMovement.lerpDrag * delta)
-		standingCol.disabled = false
-		crouchingCol.disabled = true
 	
 	if stateManager.state == stateManager.groundStates.walking:
 		velocity.x = dir.x * normalMovement.walkSpeed
 		velocity.z = dir.z * normalMovement.walkSpeed
-		standingCol.disabled = false
-		crouchingCol.disabled = true
 	
 	if stateManager.state == stateManager.groundStates.running:
 		velocity.x = dir.x * normalMovement.runSpeed
 		velocity.z = dir.z * normalMovement.runSpeed
-		standingCol.disabled = false
-		crouchingCol.disabled = true
 	
 	if stateManager.state == stateManager.groundStates.crouching:
 		velocity.x = dir.x * normalMovement.crouchSpeed
 		velocity.z = dir.z * normalMovement.crouchSpeed
-		standingCol.disabled = true
-		crouchingCol.disabled = false
 	
 func cameraManagement():
 	if stateManager.state == stateManager.groundStates.crouching or stateManager.state == stateManager.groundStates.sliding:
 		head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
 	elif not stateManager.state == stateManager.groundStates.crouching or stateManager.state == stateManager.groundStates.sliding:
 		head.position.y = lerp(head.position.y, standHeight, cameraLerp)
+	#here we manage camera fov
+	if stateManager.state == stateManager.groundStates.idle:
+		camera.fov = lerp(camera.fov, idleFov, cameraLerp)
+	if stateManager.state == stateManager.groundStates.walking:
+		camera.fov = lerp(camera.fov, walkingFov, cameraLerp)
+	if stateManager.state == stateManager.groundStates.running:
+		camera.fov = lerp(camera.fov, runningFov, cameraLerp)
+	if stateManager.state == stateManager.groundStates.crouching:
+		camera.fov = lerp(camera.fov, crouchingFov, cameraLerp)
+	if stateManager.state == stateManager.groundStates.sliding:
+		camera.fov = lerp(camera.fov, slidingFov, cameraLerp)
+	
+func colManagement():
+	if stateManager.state == stateManager.groundStates.crouching or stateManager.state == stateManager.groundStates.sliding:
+		standingCol.disabled = true
+		crouchingCol.disabled = false
+	elif not stateManager.state == stateManager.groundStates.crouching or not stateManager.state == stateManager.groundStates.sliding:
+		standingCol.disabled = false
+		crouchingCol.disabled = true
