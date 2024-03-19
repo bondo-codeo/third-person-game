@@ -59,7 +59,7 @@ func movement(dir, delta):
 		velocity.z = dir.z * normalMovement.runSpeed
 		standingCol.disabled = false
 		crouchingCol.disabled = true
-    
+	
 	if stateManager.state == stateManager.groundStates.crouching:
 		velocity.x = dir.x * normalMovement.crouchSpeed
 		velocity.z = dir.z * normalMovement.crouchSpeed

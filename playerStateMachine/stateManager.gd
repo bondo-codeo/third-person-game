@@ -2,7 +2,9 @@ extends Node
 
 enum groundStates {idle, walking, running, crouching, sliding, slideSwitch}
 enum airStates {onGround, jumping, falling}
-@onready var crouchCast = $"../crouchCheck"
+
+@onready var crouchCast = $crouchCheck
+
 
 
 
@@ -56,9 +58,3 @@ func crouchCheck():
 func goIdle():
 	if not Input.is_action_pressed("crouch") and not Input.is_action_pressed("forward") and not Input.is_action_pressed("backward") and not Input.is_action_pressed("left") and not Input.is_action_pressed("right") and not state == groundStates.sliding:
 		changeState(groundStates.idle)
-		#if not Input.is_action_pressed("forward"):
-			#if not Input.is_action_pressed("backward"):
-				#if not Input.is_action_pressed("left"):
-					#if not Input.is_action_pressed("right"):
-						#if not state == groundStates.sliding:
-							#changeState(groundStates.idle)
