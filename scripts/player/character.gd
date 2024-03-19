@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 @export var normalMovement : playerMovementData
+@onready var standingCol = $standingCol
+@onready var crouchingCol = $crouchingCol
 
 var direction = Vector3.ZERO
 @export var mouseSensitivity = .3
@@ -43,14 +45,24 @@ func movement(dir, delta):
 	if stateManager.state == stateManager.groundStates.idle:
 		velocity.x = lerp(velocity.x, 0.0, normalMovement.lerpDrag * delta)
 		velocity.z = lerp(velocity.z, 0.0, normalMovement.lerpDrag * delta)
+		standingCol.disabled = false
+		crouchingCol.disabled = true
 	
 	if stateManager.state == stateManager.groundStates.walking:
 		velocity.x = dir.x * normalMovement.walkSpeed
 		velocity.z = dir.z * normalMovement.walkSpeed
+		standingCol.disabled = false
+		crouchingCol.disabled = true
 	
 	if stateManager.state == stateManager.groundStates.running:
 		velocity.x = dir.x * normalMovement.runSpeed
 		velocity.z = dir.z * normalMovement.runSpeed
+		standingCol.disabled = false
+		crouchingCol.disabled = true
+    
 	if stateManager.state == stateManager.groundStates.crouching:
 		velocity.x = dir.x * normalMovement.crouchSpeed
 		velocity.z = dir.z * normalMovement.crouchSpeed
+		standingCol.disabled = true
+		crouchingCol.disabled = false
+
