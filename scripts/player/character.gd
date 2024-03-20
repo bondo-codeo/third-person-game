@@ -44,7 +44,7 @@ func _physics_process(delta):
 	cameraManagement()
 	colManagement()
 	move_and_slide()
-	print(camera.fov)
+	print(stateManager.state)
 
 func applyGravity(delta):
 	if not is_on_floor():

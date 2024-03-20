@@ -1,70 +1,56 @@
-[gd_scene load_steps=11 format=3 uid="uid://bj2wpga34duo1"]
+[gd_scene load_steps=7 format=3 uid="uid://bj2wpga34duo1"]
 
-[ext_resource type="Texture2D" uid="uid://rji2tphxi5ny" path="res://defTexture.png" id="1_h8odj"]
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_tjvnd"]
-[ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://player assets/character.tscn" id="2_b8trg"]
+[ext_resource type="PackedScene" uid="uid://bstnvgrqnm7ee" path="res://world assets/gasStation.glb" id="3_3ttfg"]
+[ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://player scenes/character.tscn" id="4_xg7cc"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jj8eb"]
-panorama = ExtResource("1_h8odj")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cpboi"]
+sky_top_color = Color(0.0705882, 0.478431, 0.694118, 1)
+sky_horizon_color = Color(0.576471, 0.776471, 0.890196, 1)
+sky_curve = 0.235375
+ground_bottom_color = Color(0.388235, 0.478431, 0.427451, 1)
+ground_horizon_color = Color(0.486275, 0.831373, 0.517647, 1)
+ground_curve = 0.3091
+sun_angle_max = 34.44
+sun_curve = 0.121838
 
-[sub_resource type="Sky" id="Sky_o60mu"]
-sky_material = SubResource("PanoramaSkyMaterial_jj8eb")
+[sub_resource type="Sky" id="Sky_ma2ta"]
+sky_material = SubResource("ProceduralSkyMaterial_cpboi")
 
-[sub_resource type="Environment" id="Environment_yf047"]
+[sub_resource type="Environment" id="Environment_4nsv1"]
 background_mode = 2
-sky = SubResource("Sky_o60mu")
-tonemap_mode = 2
+sky = SubResource("Sky_ma2ta")
+ambient_light_color = Color(0.560784, 0.709804, 0.701961, 1)
+ambient_light_sky_contribution = 0.27
+tonemap_mode = 3
 glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxohr"]
-albedo_color = Color(0.905882, 0.654902, 0.556863, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_hop3o"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1ou1"]
-albedo_color = Color(1, 1, 0.305882, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0pk3"]
-albedo_color = Color(0.34902, 0.807843, 0.768627, 1)
+fog_light_color = Color(0.419608, 0.6, 0.470588, 1)
+fog_light_energy = 0.66
+fog_sun_scatter = 0.13
+fog_density = 0.0205
+fog_aerial_perspective = 0.495
+fog_sky_affect = 0.579
+adjustment_enabled = true
+adjustment_contrast = 1.17
+adjustment_saturation = 1.08
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_tjvnd")
 
 [node name="env" type="Node3D" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
-environment = SubResource("Environment_yf047")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+environment = SubResource("Environment_4nsv1")
+
 [node name="stage" type="Node3D" parent="."]
 transform = Transform3D(2.95401, 0, 0, 0, 2.39799, 0, 0, 0, 2.62333, 0, 0, 0)
 
-[node name="box" type="CSGBox3D" parent="stage"]
-transform = Transform3D(2.2, 0, 0, 0, 0.175633, 0, 0, 0, 2.3, 1.93883, 0, 0)
-use_collision = true
-size = Vector3(4.46399, 1, 2.90918)
-material = SubResource("StandardMaterial3D_kxohr")
+[node name="gasStation" parent="stage" instance=ExtResource("3_3ttfg")]
+transform = Transform3D(0.094, 0, 0, 0, 0.115, 0, 0, 0, 0.105, 0, 0, 0)
 
-[node name="cylinder test" type="CSGMesh3D" parent="stage"]
-transform = Transform3D(2.29661, 0, 0, 0, -4.38509e-08, 0.829044, 0, -1.00319, -3.62387e-08, 0.158124, -0.0249054, 0)
-use_collision = true
-mesh = SubResource("CylinderMesh_hop3o")
-material = SubResource("StandardMaterial3D_g1ou1")
-
-[node name="cylinder test2" type="CSGMesh3D" parent="stage"]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, -2.15995, -0.47869, -0.088478)
-use_collision = true
-mesh = SubResource("CylinderMesh_hop3o")
-material = SubResource("StandardMaterial3D_g1ou1")
-
-[node name="box2" type="CSGBox3D" parent="stage"]
-transform = Transform3D(2.2, 0, 0, 0, 0.175633, 0, 0, 0, 2.3, 5.03566, 0.689112, 0)
-use_collision = true
-size = Vector3(2.70142, 1, 2.90918)
-material = SubResource("StandardMaterial3D_t0pk3")
-
-[node name="character" parent="." instance=ExtResource("2_b8trg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37916, 1.13933, 5.66488)
+[node name="character" parent="." instance=ExtResource("4_xg7cc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.97444, -1.19327, 10.5964)
