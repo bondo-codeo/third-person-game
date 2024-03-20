@@ -1,5 +1,7 @@
 extends Node
 
+#lots of spaghetti here, will get around to fixing it eventually but for now it works
+
 enum groundStates {idle, walking, running, crouching, sliding, slideSwitch}
 enum airStates {onGround, jumping, falling}
 
