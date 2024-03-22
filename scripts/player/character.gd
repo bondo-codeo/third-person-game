@@ -108,3 +108,4 @@ func guiManagement():
 		stateInfo.text = "[center]State = Crouching[center]"
 	if stateManager.state == stateManager.groundStates.sliding:
 		stateInfo.text = "[center]State = Sliding[center]"
+#testing if committing in main will fuck things up
