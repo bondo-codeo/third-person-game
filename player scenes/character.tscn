@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cx8df2xm2muud"]
+[gd_scene load_steps=7 format=3 uid="uid://cx8df2xm2muud"]
 
 [ext_resource type="Script" path="res://scripts/player/character.gd" id="1_etjqj"]
 [ext_resource type="Resource" uid="uid://dke513kobsbh3" path="res://custom resources/tres/normalMovement.tres" id="2_efgkx"]
@@ -8,6 +8,13 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yh2bu"]
 height = 1.2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1rt1"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 
 [node name="character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -33,3 +40,35 @@ script = ExtResource("3_nsn5b")
 [node name="crouchCheck" type="RayCast3D" parent="stateManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 target_position = Vector3(0, 0.8, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+top_level = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+offset_right = 285.0
+grow_vertical = 0
+size_flags_vertical = 8
+auto_translate = false
+localize_numeral_system = false
+tooltip_text = "showStates"
+theme_override_styles/panel = SubResource("StyleBoxFlat_e1rt1")
+
+[node name="stateInfo" type="RichTextLabel" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center]blanktext[/center]"
+scroll_active = false

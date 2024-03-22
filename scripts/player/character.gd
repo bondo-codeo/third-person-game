@@ -10,6 +10,7 @@ var direction = Vector3.ZERO
 @onready var head = $head
 @onready var camera = $head/Camera3D
 
+@onready var stateInfo = $CanvasLayer/Panel/stateInfo
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -43,6 +44,7 @@ func _physics_process(delta):
 	movement(direction, delta)
 	cameraManagement()
 	colManagement()
+	guiManagement()
 	move_and_slide()
 	print(stateManager.state)
 
@@ -95,3 +97,14 @@ func colManagement():
 	elif not stateManager.state == stateManager.groundStates.crouching or not stateManager.state == stateManager.groundStates.sliding:
 		standingCol.disabled = false
 		crouchingCol.disabled = true
+func guiManagement():
+	if stateManager.state == stateManager.groundStates.idle:
+		stateInfo.text = "[center]State = Idle[center]"
+	if stateManager.state == stateManager.groundStates.walking:
+		stateInfo.text = "[center]State = Walking[center]"
+	if stateManager.state == stateManager.groundStates.running:
+		stateInfo.text = "[center]State = Running[center]"
+	if stateManager.state == stateManager.groundStates.crouching:
+		stateInfo.text = "[center]State = Crouching[center]"
+	if stateManager.state == stateManager.groundStates.sliding:
+		stateInfo.text = "[center]State = Sliding[center]"
