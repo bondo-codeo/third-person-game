@@ -46,7 +46,7 @@ func _physics_process(delta):
 	colManagement()
 	guiManagement()
 	move_and_slide()
-	print(stateManager.state)
+	print(delta)
 
 func applyGravity(delta):
 	if not is_on_floor():
@@ -62,17 +62,16 @@ func movement(dir, delta):
 		velocity.z = lerp(velocity.z, 0.0, normalMovement.lerpDrag * delta)
 	
 	if stateManager.state == stateManager.groundStates.walking:
-		velocity.x = dir.x * normalMovement.walkSpeed
-		velocity.z = dir.z * normalMovement.walkSpeed
+		velocity.x = lerp(velocity.x, dir.x * normalMovement.walkSpeed, normalMovement.lerpDrag * delta)
+		velocity.z = lerp(velocity.z, dir.z * normalMovement.walkSpeed, normalMovement.lerpDrag * delta)
 	
 	if stateManager.state == stateManager.groundStates.running:
-		velocity.x = dir.x * normalMovement.runSpeed
-		velocity.z = dir.z * normalMovement.runSpeed
+		velocity.x = lerp(velocity.x, dir.x * normalMovement.runSpeed, normalMovement.lerpDrag * delta)
+		velocity.z = lerp(velocity.z, dir.z * normalMovement.runSpeed, normalMovement.lerpDrag * delta)
 	
 	if stateManager.state == stateManager.groundStates.crouching:
-		velocity.x = dir.x * normalMovement.crouchSpeed
-		velocity.z = dir.z * normalMovement.crouchSpeed
-	
+		velocity.x = lerp(velocity.x, dir.x * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
+		velocity.z = lerp(velocity.z, dir.z * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
 func cameraManagement():
 	if stateManager.state == stateManager.groundStates.crouching or stateManager.state == stateManager.groundStates.sliding:
 		head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
