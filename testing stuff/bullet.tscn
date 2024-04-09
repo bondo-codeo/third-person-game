@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuia3mqsudl3k"]
+
+[ext_resource type="Script" path="res://testing stuff/bullet.gd" id="1_ywahi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vriwi"]
+albedo_color = Color(0.670588, 0.372549, 0.380392, 1)
+roughness = 0.66
+emission_enabled = true
+emission = Color(0.431373, 0.607843, 0.431373, 1)
+emission_energy_multiplier = 8.55
+
+[sub_resource type="BoxMesh" id="BoxMesh_8ug0n"]
+
+[node name="bullet" type="Node3D"]
+script = ExtResource("1_ywahi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0438148, 0, 0, 0, 0.057885, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_vriwi")
+mesh = SubResource("BoxMesh_8ug0n")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -0.545)

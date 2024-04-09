@@ -46,7 +46,6 @@ func _physics_process(delta):
 	
 	guiManagement()
 	move_and_slide()
-	print(currentState)
 
 func applyGravity(delta):
 	if not is_on_floor():
