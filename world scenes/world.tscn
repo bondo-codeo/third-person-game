@@ -61,9 +61,9 @@ size = Vector3(1, 1, 1.11609)
 material = SubResource("StandardMaterial3D_6afgc")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="stage"]
-transform = Transform3D(25.4402, 0, 0, 0, 0.0253737, 0, 0, 0, 19.3113, -9.78541, 0.259761, 1.37599)
+transform = Transform3D(25.4402, 0, 0, 0, 0.0253737, 0, 0, 0, 19.3113, -9.78541, 0.0533903, 1.37599)
 use_collision = true
-size = Vector3(1, 1, 1.11609)
+size = Vector3(1, 12.57, 0.956)
 material = SubResource("StandardMaterial3D_6afgc")
 
 [node name="character" parent="." instance=ExtResource("4_xg7cc")]

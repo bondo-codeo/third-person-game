@@ -1,6 +1,6 @@
 extends Node3D
 
-var speed = 90
+var speed = 40
 
 @onready var mesh = $MeshInstance3D
 
@@ -14,4 +14,5 @@ func _process(delta):
 	if ray.is_colliding():
 		mesh.visible = false
 		particle.emitting = true
+		ray.enabled = false
 		print("bullet hit something baby")

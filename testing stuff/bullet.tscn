@@ -37,10 +37,8 @@ transform = Transform3D(0.0438148, 0, 0, 0, 0.057885, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_vriwi")
 mesh = SubResource("BoxMesh_8ug0n")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, -0.545)
-
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.029652)
 material_override = SubResource("StandardMaterial3D_8vu63")
 emitting = false
 one_shot = true
@@ -48,3 +46,7 @@ explosiveness = 1.0
 visibility_aabb = AABB(-1.76191, -1.06219, -2.14521, 3.52382, 2.12437, 4.29041)
 process_material = SubResource("ParticleProcessMaterial_cpapi")
 draw_pass_1 = SubResource("BoxMesh_6ku5s")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.23069)
+target_position = Vector3(0, 0, -1)

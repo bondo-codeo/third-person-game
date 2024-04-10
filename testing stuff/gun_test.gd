@@ -12,5 +12,4 @@ func _process(delta):
 		instance.position = barrel.global_position
 		instance.transform.basis = barrel.global_transform.basis
 		get_tree().get_root().add_child(instance)
-		print(instance.position)
 		print("bullet fired baby")
