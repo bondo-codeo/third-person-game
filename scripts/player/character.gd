@@ -43,7 +43,6 @@ func _physics_process(delta):
 	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), normalMovement.lerpDrag * delta)
 	currentState = stateManager.state
 	stateMatching(direction, delta)
-	
 	guiManagement()
 	move_and_slide()
 

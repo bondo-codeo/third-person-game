@@ -29,6 +29,7 @@ border_width_bottom = 3
 [node name="character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
+floor_max_angle = 1.22173
 script = ExtResource("1_etjqj")
 normalMovement = SubResource("Resource_6i5pg")
 

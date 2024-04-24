@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj2wpga34duo1"]
+[gd_scene load_steps=7 format=3 uid="uid://bj2wpga34duo1"]
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_tjvnd"]
-[ext_resource type="Texture2D" uid="uid://4yfucrmixex5" path="res://addons/kenney_prototype_textures/dark/texture_09.png" id="2_11qih"]
+[ext_resource type="PackedScene" uid="uid://c57ylpidbn4os" path="res://world assets/church/churchMap.blend" id="2_5xslo"]
 [ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://player scenes/character.tscn" id="4_xg7cc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cpboi"]
@@ -20,24 +20,26 @@ sky_material = SubResource("ProceduralSkyMaterial_cpboi")
 [sub_resource type="Environment" id="Environment_4nsv1"]
 background_mode = 2
 sky = SubResource("Sky_ma2ta")
-ambient_light_color = Color(0.560784, 0.709804, 0.701961, 1)
-ambient_light_sky_contribution = 0.27
-tonemap_mode = 3
-glow_enabled = true
-fog_light_color = Color(0.419608, 0.6, 0.470588, 1)
-fog_light_energy = 0.66
-fog_sun_scatter = 0.13
-fog_density = 0.0205
-fog_aerial_perspective = 0.495
-fog_sky_affect = 0.579
+sky_rotation = Vector3(0, -0.457276, 0)
+ambient_light_color = Color(0.698039, 0.831373, 0.988235, 1)
+ambient_light_sky_contribution = 0.7
+tonemap_mode = 2
+tonemap_exposure = 0.49
+glow_intensity = 0.0
+fog_enabled = true
+fog_light_color = Color(0.45098, 0.545098, 0.611765, 1)
+fog_light_energy = 0.33
+fog_sun_scatter = 0.24
+fog_aerial_perspective = 1.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0184
+volumetric_fog_albedo = Color(0.352941, 0.509804, 0.568627, 1)
+volumetric_fog_emission = Color(0.360784, 0.576471, 0.631373, 1)
+volumetric_fog_emission_energy = 0.8
+volumetric_fog_length = 117.89
 adjustment_enabled = true
-adjustment_contrast = 1.17
-adjustment_saturation = 1.08
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6afgc"]
-albedo_texture = ExtResource("2_11qih")
-uv1_scale = Vector3(7.255, 7.255, 7.255)
-uv1_triplanar = true
+adjustment_contrast = 1.42
+adjustment_saturation = 1.67
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_tjvnd")
@@ -45,7 +47,7 @@ script = ExtResource("1_tjvnd")
 [node name="env" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866023, 0.0455762, 0.497922, 0, 0.995837, -0.0911518, -0.500003, -0.0789396, -0.862418, 16.5599, 69.9861, -28.6822)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
@@ -54,17 +56,8 @@ environment = SubResource("Environment_4nsv1")
 [node name="stage" type="Node3D" parent="."]
 transform = Transform3D(2.95401, 0, 0, 0, 2.39799, 0, 0, 0, 2.62333, 0, 0, 0)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="stage"]
-transform = Transform3D(5.04383, 0, 0, 0, 0.159291, 0, 0, 0, 4.39446, 0, 0.796164, 0.255074)
-use_collision = true
-size = Vector3(1, 1, 1.11609)
-material = SubResource("StandardMaterial3D_6afgc")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="stage"]
-transform = Transform3D(25.4402, 0, 0, 0, 0.0253737, 0, 0, 0, 19.3113, -9.78541, 0.0533903, 1.37599)
-use_collision = true
-size = Vector3(1, 12.57, 0.956)
-material = SubResource("StandardMaterial3D_6afgc")
+[node name="churchMap" parent="stage" instance=ExtResource("2_5xslo")]
+transform = Transform3D(0.123, 0, 0, 0, 0.123, 0, 0, 0, 0.123, 0, 0, 0)
 
 [node name="character" parent="." instance=ExtResource("4_xg7cc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.28161, 1.75147, 8.21033)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.3018, 61.5358, 8.21033)
