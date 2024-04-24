@@ -1,45 +1,44 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj2wpga34duo1"]
+[gd_scene load_steps=8 format=3 uid="uid://bj2wpga34duo1"]
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_tjvnd"]
-[ext_resource type="PackedScene" uid="uid://c57ylpidbn4os" path="res://world assets/church/churchMap.blend" id="2_5xslo"]
+[ext_resource type="Texture2D" uid="uid://rwhs8t1ar80q" path="res://addons/kenney_prototype_textures/orange/texture_04.png" id="2_2qged"]
 [ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://player scenes/character.tscn" id="4_xg7cc"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cpboi"]
-sky_top_color = Color(0.0705882, 0.478431, 0.694118, 1)
-sky_horizon_color = Color(0.576471, 0.776471, 0.890196, 1)
-sky_curve = 0.235375
-ground_bottom_color = Color(0.388235, 0.478431, 0.427451, 1)
-ground_horizon_color = Color(0.486275, 0.831373, 0.517647, 1)
-ground_curve = 0.3091
-sun_angle_max = 34.44
-sun_curve = 0.121838
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_354yv"]
+sky_top_color = Color(0.4, 0.54902, 0.654902, 1)
+sky_horizon_color = Color(0.560784, 0.654902, 0.670588, 1)
+sky_curve = 0.0588437
+ground_bottom_color = Color(0.466667, 0.529412, 0.85098, 1)
+ground_horizon_color = Color(0.560784, 0.654902, 0.670588, 1)
+ground_curve = 0.0721002
 
-[sub_resource type="Sky" id="Sky_ma2ta"]
-sky_material = SubResource("ProceduralSkyMaterial_cpboi")
+[sub_resource type="Sky" id="Sky_vf38b"]
+sky_material = SubResource("ProceduralSkyMaterial_354yv")
 
-[sub_resource type="Environment" id="Environment_4nsv1"]
+[sub_resource type="Environment" id="Environment_hvv76"]
 background_mode = 2
-sky = SubResource("Sky_ma2ta")
-sky_rotation = Vector3(0, -0.457276, 0)
-ambient_light_color = Color(0.698039, 0.831373, 0.988235, 1)
-ambient_light_sky_contribution = 0.7
-tonemap_mode = 2
-tonemap_exposure = 0.49
-glow_intensity = 0.0
-fog_enabled = true
-fog_light_color = Color(0.45098, 0.545098, 0.611765, 1)
-fog_light_energy = 0.33
-fog_sun_scatter = 0.24
-fog_aerial_perspective = 1.0
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0184
-volumetric_fog_albedo = Color(0.352941, 0.509804, 0.568627, 1)
-volumetric_fog_emission = Color(0.360784, 0.576471, 0.631373, 1)
-volumetric_fog_emission_energy = 0.8
-volumetric_fog_length = 117.89
+sky = SubResource("Sky_vf38b")
+ambient_light_color = Color(0.65098, 0.85098, 0.968627, 1)
+tonemap_mode = 3
+tonemap_exposure = 1.51
+ssr_fade_in = 0.270375
+ssr_fade_out = 1.23114
+ssil_enabled = true
+ssil_radius = 14.45
+sdfgi_read_sky_light = false
+sdfgi_bounce_feedback = 0.57
+fog_light_color = Color(0.32549, 0.666667, 0.992157, 1)
+fog_light_energy = 3.36
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.65098, 0.8, 1, 1)
 adjustment_enabled = true
-adjustment_contrast = 1.42
-adjustment_saturation = 1.67
+adjustment_brightness = 1.08
+adjustment_contrast = 1.17
+adjustment_saturation = 1.17
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xrq1"]
+albedo_texture = ExtResource("2_2qged")
+uv1_triplanar = true
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_tjvnd")
@@ -51,13 +50,22 @@ transform = Transform3D(-0.866023, 0.0455762, 0.497922, 0, 0.995837, -0.0911518,
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
-environment = SubResource("Environment_4nsv1")
+environment = SubResource("Environment_hvv76")
 
 [node name="stage" type="Node3D" parent="."]
 transform = Transform3D(2.95401, 0, 0, 0, 2.39799, 0, 0, 0, 2.62333, 0, 0, 0)
 
-[node name="churchMap" parent="stage" instance=ExtResource("2_5xslo")]
-transform = Transform3D(0.123, 0, 0, 0, 0.123, 0, 0, 0, 0.123, 0, 0, 0)
+[node name="CSGBox3D" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_4xrq1")
+use_collision = true
+size = Vector3(25.27, 1, 38.615)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1891, 1.51734, 0)
+material_override = SubResource("StandardMaterial3D_4xrq1")
+use_collision = true
+size = Vector3(25.27, 1, 38.615)
 
 [node name="character" parent="." instance=ExtResource("4_xg7cc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.3018, 61.5358, 8.21033)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.52758, 0)

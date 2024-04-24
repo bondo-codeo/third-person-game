@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx8df2xm2muud"]
+[gd_scene load_steps=8 format=3 uid="uid://cx8df2xm2muud"]
 
 [ext_resource type="Script" path="res://scripts/player/character.gd" id="1_etjqj"]
 [ext_resource type="Script" path="res://custom resources/scripts/playerMovementData.gd" id="2_hjj3c"]
-[ext_resource type="PackedScene" uid="uid://b8fmqq5dxtvka" path="res://testing stuff/gun_test.tscn" id="3_avh0o"]
 [ext_resource type="Script" path="res://playerStateMachine/stateManager.gd" id="3_nsn5b"]
 
 [sub_resource type="Resource" id="Resource_6i5pg"]
@@ -45,9 +44,6 @@ disabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
-
-[node name="gunTest" parent="head" instance=ExtResource("3_avh0o")]
-transform = Transform3D(0.305, 0, 0, 0, 0.305, 0, 0, 0, 0.305, 0.399, -0.194, -0.557)
 
 [node name="stateManager" type="Node3D" parent="."]
 script = ExtResource("3_nsn5b")
