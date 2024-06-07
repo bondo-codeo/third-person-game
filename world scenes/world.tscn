@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bj2wpga34duo1"]
+[gd_scene load_steps=8 format=3 uid="uid://bj2wpga34duo1"]
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_tjvnd"]
-[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_xv2ac"]
-[ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="3_ro6ce"]
+[ext_resource type="Texture2D" uid="uid://caany73wvw2jo" path="res://textures/dark/texture_02.png" id="2_cbpri"]
 [ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://player scenes/character.tscn" id="4_xg7cc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_354yv"]
@@ -24,6 +23,7 @@ tonemap_mode = 3
 tonemap_exposure = 1.51
 ssr_fade_in = 0.270375
 ssr_fade_out = 1.23114
+ssao_enabled = true
 ssil_enabled = true
 ssil_radius = 14.45
 sdfgi_read_sky_light = false
@@ -32,22 +32,13 @@ fog_light_color = Color(0.32549, 0.666667, 0.992157, 1)
 fog_light_energy = 3.36
 volumetric_fog_density = 0.02
 volumetric_fog_albedo = Color(0.65098, 0.8, 1, 1)
-adjustment_enabled = true
 adjustment_brightness = 1.08
 adjustment_contrast = 1.17
 adjustment_saturation = 1.17
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4s65m"]
-points = PackedVector3Array(-2, 0.5, -2, -2, -0.5, -2, 2, -0.5, -2, 2, 0.5, -2, -2, 0.5, 2, -2, -0.5, 2, 2, -0.5, 2, 2, 0.5, 2)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7d8gr"]
-points = PackedVector3Array(-0.4, 0.5, -1, 2.16003e-07, 1, -0.5, -2, 1.5, 0, -2, 1.5, 1.34936e-07, -2, 0.5, -1, 2, 0.5, 2, 2, 1.5, 2, 2, 1.5, 2, 2, 1.5, 2, -2, 1.5, 2, -2, 0.5, 2)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6b3gt"]
-points = PackedVector3Array(4.25, -0.5, -3, 2, 0, -2, 2, 2.34897e-08, -2, 2, 0, -2, 2, -0.5, 6.5, 2, -0.5, 6.5, 2, -0.5, 6.5, 2, -0.5, 6.5, 2, -0.5, 6.5, 2, -0.5, 6.5, 5.25, -0.5, 5.5, 3, 0, 6.5, 3, 0, 6.5, 3, 3.3802e-07, 6.5, 2, 0, 6.5)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u5mri"]
-points = PackedVector3Array(0.1, 0.75, -0.374996, 0.1, 0.75, -0.375, 0.0999982, 0.75, -0.374999, 1.46048e-08, 0.5, -1.25, 1.625, 0.5, -1.25, 1.625, 0.5, -1.25, 1.625, 0.5, -1.25, 1.625, 0.500001, -1.25, 0.900001, 1, 0.625, 0.9, 1, 0.625, 0.9, 1, 0.625, 1.5, 0.999998, 1.37499, 1.5, 1, 1.375, 1.5, 1, 1.375, 1.5, 1, 1.375, 1.5, 1, 1.375, 1.5, 1, 1.375, 2.3051e-07, 0.5, -0.375, 1.21214e-07, 0.5, -0.375, 0, 0.5, -0.375, 1.47253e-08, 0.5, -0.375, 1.30012e-08, 0.5, -0.375, 1.23304e-08, 0.5, -0.375, 1.625, 0.5, -0.375, 1.5, 0.5, 1.375)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmifp"]
+albedo_texture = ExtResource("2_cbpri")
+uv1_triplanar = true
 
 [node name="world" type="Node3D"]
 script = ExtResource("1_tjvnd")
@@ -55,7 +46,7 @@ script = ExtResource("1_tjvnd")
 [node name="env" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
-transform = Transform3D(-0.866023, 0.0455762, 0.497922, 0, 0.995837, -0.0911518, -0.500003, -0.0789396, -0.862418, 16.5599, 69.9861, -28.6822)
+transform = Transform3D(-0.819647, -0.494081, 0.289935, 0.252309, 0.14303, 0.957017, -0.514313, 0.85757, 0.00742722, 13.0755, 7.278, -16.0077)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
@@ -64,26 +55,17 @@ environment = SubResource("Environment_hvv76")
 [node name="stage" type="Node3D" parent="."]
 transform = Transform3D(2.95401, 0, 0, 0, 2.39799, 0, 0, 0, 2.62333, 0, 0, 0)
 
-[node name="FuncGodotMap" type="Node3D" parent="stage"]
-transform = Transform3D(0.338523, 0, 0, 0, 0.417016, 0, 0, 0, 0.381195, 0, 0, 0)
-script = ExtResource("2_xv2ac")
-local_map_file = "res://testing stuff/qodot map.map"
-map_settings = ExtResource("3_ro6ce")
+[node name="CSGBox3D" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.585861, 0, -1.23618)
+material_override = SubResource("StandardMaterial3D_cmifp")
+use_collision = true
+size = Vector3(6.099, 1, 10.4724)
 
-[node name="entity_0_worldspawn" type="StaticBody3D" parent="stage/FuncGodotMap"]
-collision_mask = 0
-
-[node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="stage/FuncGodotMap/entity_0_worldspawn"]
-shape = SubResource("ConvexPolygonShape3D_4s65m")
-
-[node name="entity_0_brush_1_collision_shape" type="CollisionShape3D" parent="stage/FuncGodotMap/entity_0_worldspawn"]
-shape = SubResource("ConvexPolygonShape3D_7d8gr")
-
-[node name="entity_0_brush_2_collision_shape" type="CollisionShape3D" parent="stage/FuncGodotMap/entity_0_worldspawn"]
-shape = SubResource("ConvexPolygonShape3D_6b3gt")
-
-[node name="entity_0_brush_3_collision_shape" type="CollisionShape3D" parent="stage/FuncGodotMap/entity_0_worldspawn"]
-shape = SubResource("ConvexPolygonShape3D_u5mri")
+[node name="CSGBox3D2" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44382, 1.31504, -1.23618)
+material_override = SubResource("StandardMaterial3D_cmifp")
+use_collision = true
+size = Vector3(6.099, 2.45361, 10.4724)
 
 [node name="character" parent="." instance=ExtResource("4_xg7cc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.52758, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.94558, 8.23907, -9.81019)

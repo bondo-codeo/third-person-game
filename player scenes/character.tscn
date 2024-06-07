@@ -43,7 +43,16 @@ disabled = true
 [node name="head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="head"]
+[node name="offset" type="SpringArm3D" parent="head"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+margin = 0.2
+
+[node name="camSpring" type="SpringArm3D" parent="head/offset"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 1)
+spring_length = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="head/offset/camSpring"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="stateManager" type="Node3D" parent="."]
 script = ExtResource("3_nsn5b")

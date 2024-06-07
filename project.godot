@@ -20,7 +20,7 @@ window/size/viewport_width=1307
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/qodot/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 

@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+
 @export var normalMovement : playerMovementData
 @onready var standingCol = $standingCol
 @onready var crouchingCol = $crouchingCol
@@ -8,7 +9,7 @@ var direction = Vector3.ZERO
 @export var mouseSensitivity = .3
 
 @onready var head = $head
-@onready var camera = $head/Camera3D
+@onready var camera = $head/offset/camSpring/Camera3D
 
 @onready var stateInfo = $CanvasLayer/Panel/stateInfo
 
