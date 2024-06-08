@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cx8df2xm2muud"]
+[gd_scene load_steps=9 format=3 uid="uid://cx8df2xm2muud"]
 
 [ext_resource type="Script" path="res://scripts/player/character.gd" id="1_etjqj"]
 [ext_resource type="Script" path="res://custom resources/scripts/playerMovementData.gd" id="2_hjj3c"]
 [ext_resource type="Script" path="res://playerStateMachine/stateManager.gd" id="3_nsn5b"]
+[ext_resource type="PackedScene" uid="uid://bl66s6mq6lipx" path="res://testing stuff/baseCharacter.tscn" id="4_g18nh"]
 
 [sub_resource type="Resource" id="Resource_6i5pg"]
 script = ExtResource("2_hjj3c")
@@ -92,3 +93,6 @@ size_flags_vertical = 4
 bbcode_enabled = true
 text = "[center]blanktext[/center]"
 scroll_active = false
+
+[node name="baseCharacter" parent="." instance=ExtResource("4_g18nh")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -0.98059, 0)

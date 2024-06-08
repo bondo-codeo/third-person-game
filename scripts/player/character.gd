@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 
+@onready var character = $baseCharacter
+
 @export var normalMovement : playerMovementData
 @onready var standingCol = $standingCol
 @onready var crouchingCol = $crouchingCol
@@ -8,8 +10,11 @@ extends CharacterBody3D
 var direction = Vector3.ZERO
 @export var mouseSensitivity = .3
 
+
 @onready var head = $head
 @onready var camera = $head/offset/camSpring/Camera3D
+@onready var camSpring = $head/offset/camSpring
+
 
 @onready var stateInfo = $CanvasLayer/Panel/stateInfo
 
@@ -32,10 +37,12 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	 
 func _input(event):
+	#mouse rotation
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(event.relative.x * mouseSensitivity * -1))
 		head.rotate_x(deg_to_rad(event.relative.y * mouseSensitivity * -1))
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-80), deg_to_rad(85))
+
 
 func _physics_process(delta):
 	applyGravity(delta)
@@ -45,6 +52,7 @@ func _physics_process(delta):
 	currentState = stateManager.state
 	stateMatching(direction, delta)
 	guiManagement()
+	cameraZoom()
 	move_and_slide()
 
 func applyGravity(delta):
@@ -63,6 +71,7 @@ func stateMatching(dir, delta):
 			camera.fov = lerp(camera.fov, idleFov, cameraLerp)
 			standingCol.disabled = false
 			crouchingCol.disabled = true
+			character.idle()
 	
 		stateManager.groundStates.walking:
 			velocity.x = lerp(velocity.x, dir.x * normalMovement.walkSpeed, normalMovement.lerpDrag * delta)
@@ -71,6 +80,7 @@ func stateMatching(dir, delta):
 			camera.fov = lerp(camera.fov, walkingFov, cameraLerp)
 			standingCol.disabled = false
 			crouchingCol.disabled = true
+			character.walk()
 	
 		stateManager.groundStates.running:
 			velocity.x = lerp(velocity.x, dir.x * normalMovement.runSpeed, normalMovement.lerpDrag * delta)
@@ -79,8 +89,17 @@ func stateMatching(dir, delta):
 			camera.fov = lerp(camera.fov, runningFov, cameraLerp)
 			standingCol.disabled = false
 			crouchingCol.disabled = true
+			character.run()
 	
-		stateManager.groundStates.crouching:
+		stateManager.groundStates.crouchingIdle:
+			velocity.x = lerp(velocity.x, dir.x * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
+			velocity.z = lerp(velocity.z, dir.z * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
+			head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
+			camera.fov = lerp(camera.fov, crouchingFov, cameraLerp)
+			standingCol.disabled = true
+			crouchingCol.disabled = false
+	
+		stateManager.groundStates.crouchWalking:
 			velocity.x = lerp(velocity.x, dir.x * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
 			velocity.z = lerp(velocity.z, dir.z * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
 			head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
@@ -94,7 +113,11 @@ func stateMatching(dir, delta):
 			standingCol.disabled = true
 			crouchingCol.disabled = false
 
-
+func cameraZoom():
+	if Input.is_action_just_released("scrollUp") and camSpring.spring_length > 1.4:
+		camSpring.spring_length -= 0.1
+	elif Input.is_action_just_released("scrollDown") and camSpring.spring_length < 3:
+		camSpring.spring_length += 0.1
 
 func guiManagement():
 	if stateManager.state == stateManager.groundStates.idle:
@@ -103,8 +126,10 @@ func guiManagement():
 		stateInfo.text = "[center]State = Walking[center]"
 	if stateManager.state == stateManager.groundStates.running:
 		stateInfo.text = "[center]State = Running[center]"
-	if stateManager.state == stateManager.groundStates.crouching:
-		stateInfo.text = "[center]State = Crouching[center]"
+	if stateManager.state == stateManager.groundStates.crouchingIdle:
+		stateInfo.text = "[center]State = CrouchingIdle[center]"
 	if stateManager.state == stateManager.groundStates.sliding:
 		stateInfo.text = "[center]State = Sliding[center]"
+	if stateManager.state == stateManager.groundStates.crouchWalking:
+		stateInfo.text = "[center]State = crouchWalking[center]"
 #testing if committing in main will fuck things up
