@@ -17,7 +17,7 @@ lerpDrag = 20
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_trh88"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yh2bu"]
-height = 1.2
+height = 1.69552
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1rt1"]
 bg_color = Color(0, 0, 0, 1)
@@ -37,7 +37,7 @@ normalMovement = SubResource("Resource_6i5pg")
 shape = SubResource("CapsuleShape3D_trh88")
 
 [node name="crouchingCol" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.146232, 0)
 shape = SubResource("CapsuleShape3D_yh2bu")
 disabled = true
 
@@ -59,8 +59,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 script = ExtResource("3_nsn5b")
 
 [node name="crouchCheck" type="RayCast3D" parent="stateManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-target_position = Vector3(0, 0.8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+target_position = Vector3(0, 0.3, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

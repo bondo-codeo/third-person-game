@@ -68,10 +68,10 @@ use_collision = true
 size = Vector3(6.099, 2.45361, 10.4724)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55609, 1.38683, -1.23618)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55609, 1.66249, -1.23618)
 material_override = SubResource("StandardMaterial3D_cmifp")
 use_collision = true
-size = Vector3(2.91779, 0.719969, 10.4724)
+size = Vector3(2.957, 0.903, 10.472)
 
 [node name="character" parent="." instance=ExtResource("4_xg7cc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.94558, 8.23907, -9.81019)

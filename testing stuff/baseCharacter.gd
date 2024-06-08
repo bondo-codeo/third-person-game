@@ -7,3 +7,7 @@ func walk():
 	animations.play("walk")
 func run():
 	animations.play("run")
+func crouchIdle():
+	animations.play("crouchIdle")
+func crouchWalk():
+	animations.play("crouchWalk")

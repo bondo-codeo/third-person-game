@@ -20,7 +20,6 @@ func _physics_process(delta):
 	stateManager()
 	crouchCheck()
 	sliding(delta)
-	print(moving())
 
 
 func changeState(newState):

@@ -98,6 +98,7 @@ func stateMatching(dir, delta):
 			camera.fov = lerp(camera.fov, crouchingFov, cameraLerp)
 			standingCol.disabled = true
 			crouchingCol.disabled = false
+			character.crouchIdle()
 	
 		stateManager.groundStates.crouchWalking:
 			velocity.x = lerp(velocity.x, dir.x * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
@@ -106,6 +107,7 @@ func stateMatching(dir, delta):
 			camera.fov = lerp(camera.fov, crouchingFov, cameraLerp)
 			standingCol.disabled = true
 			crouchingCol.disabled = false
+			character.crouchWalk()
 	
 		stateManager.groundStates.sliding:
 			head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
