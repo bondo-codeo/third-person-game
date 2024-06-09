@@ -14,6 +14,6 @@ func crouchWalk():
 	animations.play("crouchWalk")
 
 
-func rotateTorso(offset):
-	torso.rotation.x = lerp(torso.rotation.x, -offset, 0.2)
+func rotateTorso(offset, delta):
+	torso.rotation.x = lerp(torso.rotation.x, -offset, 20 * delta)
 	torso.rotation.x = clamp(torso.rotation.x, deg_to_rad(-50), deg_to_rad(50))

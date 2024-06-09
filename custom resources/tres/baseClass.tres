@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="humanoid" load_steps=2 format=3 uid="uid://cln71qaw0kpn"]
+
+[ext_resource type="Script" path="res://custom resources/scripts/humanoid.gd" id="1_los4v"]
+
+[resource]
+script = ExtResource("1_los4v")
+maxHealth = 150
+health = 150
+walkSpeed = 5
+crouchSpeed = 2
+runSpeed = 7
+slideSpeed = 15
+jumpPower = 4
+lerpDrag = 20

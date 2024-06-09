@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 @onready var character = $baseCharacter
 
-@export var normalMovement : playerMovementData
+@export var humanClass : humanoid
 @onready var standingCol = $standingCol
 @onready var crouchingCol = $crouchingCol
 
@@ -48,10 +48,10 @@ func _physics_process(delta):
 	applyGravity(delta)
 	jump()
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
-	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), normalMovement.lerpDrag * delta)
+	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), humanClass.lerpDrag * delta)
 	currentState = stateManager.state
 	
-	character.rotateTorso(head.rotation.x)
+	character.rotateTorso(head.rotation.x, delta)
 	
 	stateMatching(direction, delta)
 	guiManagement()
@@ -63,13 +63,13 @@ func applyGravity(delta):
 		velocity.y -= gravity * delta
 func jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = normalMovement.jumpVelocity
+		velocity.y = humanClass.jumpPower
 
 func stateMatching(dir, delta):
 	match currentState:
 		stateManager.groundStates.idle:
-			velocity.x = lerp(velocity.x, 0.0, normalMovement.lerpDrag * delta)
-			velocity.z = lerp(velocity.z, 0.0, normalMovement.lerpDrag * delta)
+			velocity.x = lerp(velocity.x, 0.0, humanClass.lerpDrag * delta)
+			velocity.z = lerp(velocity.z, 0.0, humanClass.lerpDrag * delta)
 			head.position.y = lerp(head.position.y, standHeight, cameraLerp)
 			camera.fov = lerp(camera.fov, idleFov, cameraLerp)
 			standingCol.disabled = false
@@ -77,8 +77,8 @@ func stateMatching(dir, delta):
 			character.idle()
 	
 		stateManager.groundStates.walking:
-			velocity.x = lerp(velocity.x, dir.x * normalMovement.walkSpeed, normalMovement.lerpDrag * delta)
-			velocity.z = lerp(velocity.z, dir.z * normalMovement.walkSpeed, normalMovement.lerpDrag * delta)
+			velocity.x = lerp(velocity.x, dir.x * humanClass.walkSpeed, humanClass.lerpDrag * delta)
+			velocity.z = lerp(velocity.z, dir.z * humanClass.walkSpeed, humanClass.lerpDrag * delta)
 			head.position.y = lerp(head.position.y, standHeight, cameraLerp)
 			camera.fov = lerp(camera.fov, walkingFov, cameraLerp)
 			standingCol.disabled = false
@@ -86,8 +86,8 @@ func stateMatching(dir, delta):
 			character.walk()
 	
 		stateManager.groundStates.running:
-			velocity.x = lerp(velocity.x, dir.x * normalMovement.runSpeed, normalMovement.lerpDrag * delta)
-			velocity.z = lerp(velocity.z, dir.z * normalMovement.runSpeed, normalMovement.lerpDrag * delta)
+			velocity.x = lerp(velocity.x, dir.x * humanClass.runSpeed, humanClass.lerpDrag * delta)
+			velocity.z = lerp(velocity.z, dir.z * humanClass.runSpeed, humanClass.lerpDrag * delta)
 			head.position.y = lerp(head.position.y, standHeight, cameraLerp)
 			camera.fov = lerp(camera.fov, runningFov, cameraLerp)
 			standingCol.disabled = false
@@ -95,8 +95,8 @@ func stateMatching(dir, delta):
 			character.run()
 	
 		stateManager.groundStates.crouchingIdle:
-			velocity.x = lerp(velocity.x, dir.x * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
-			velocity.z = lerp(velocity.z, dir.z * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
+			velocity.x = lerp(velocity.x, dir.x * humanClass.crouchSpeed, humanClass.lerpDrag * delta)
+			velocity.z = lerp(velocity.z, dir.z * humanClass.crouchSpeed, humanClass.lerpDrag * delta)
 			head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
 			camera.fov = lerp(camera.fov, crouchingFov, cameraLerp)
 			standingCol.disabled = true
@@ -104,8 +104,8 @@ func stateMatching(dir, delta):
 			character.crouchIdle()
 	
 		stateManager.groundStates.crouchWalking:
-			velocity.x = lerp(velocity.x, dir.x * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
-			velocity.z = lerp(velocity.z, dir.z * normalMovement.crouchSpeed, normalMovement.lerpDrag * delta)
+			velocity.x = lerp(velocity.x, dir.x * humanClass.crouchSpeed, humanClass.lerpDrag * delta)
+			velocity.z = lerp(velocity.z, dir.z * humanClass.crouchSpeed, humanClass.lerpDrag * delta)
 			head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
 			camera.fov = lerp(camera.fov, crouchingFov, cameraLerp)
 			standingCol.disabled = true
