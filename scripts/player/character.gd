@@ -50,6 +50,9 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), normalMovement.lerpDrag * delta)
 	currentState = stateManager.state
+	
+	character.rotateTorso(head.rotation.x)
+	
 	stateMatching(direction, delta)
 	guiManagement()
 	cameraZoom()
