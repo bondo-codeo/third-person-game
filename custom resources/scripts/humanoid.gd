@@ -11,7 +11,7 @@ extends Resource
 
 @export var runSpeed : int #7 default
 
-@export var slideSpeed : int #15 default 
+@export var slideSpeed : int #10 default 
 
 @export var jumpPower : int #4 default
 

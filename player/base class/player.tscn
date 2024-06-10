@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cx8df2xm2muud"]
 
-[ext_resource type="Script" path="res://scripts/player/character.gd" id="1_etjqj"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_etjqj"]
 [ext_resource type="Resource" uid="uid://cln71qaw0kpn" path="res://custom resources/tres/baseClass.tres" id="2_w7pa7"]
-[ext_resource type="Script" path="res://playerStateMachine/stateManager.gd" id="3_nsn5b"]
-[ext_resource type="PackedScene" uid="uid://bl66s6mq6lipx" path="res://testing stuff/baseCharacter.tscn" id="4_g18nh"]
+[ext_resource type="Script" path="res://player/playerStateMachine/stateManager.gd" id="3_nsn5b"]
+[ext_resource type="PackedScene" uid="uid://bl66s6mq6lipx" path="res://player/base class/baseCharacter.tscn" id="4_g18nh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_trh88"]
 
@@ -17,7 +17,7 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 
-[node name="character" type="CharacterBody3D"]
+[node name="player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 floor_max_angle = 1.22173

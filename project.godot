@@ -24,8 +24,9 @@ folder_colors={
 "res://custom resources/": "green",
 "res://custom resources/scripts/": "red",
 "res://player assets/": "blue",
-"res://player scenes/": "yellow",
-"res://playerStateMachine/": "pink",
+"res://player/": "yellow",
+"res://player/classes/": "yellow",
+"res://player/playerStateMachine/": "yellow",
 "res://scripts/": "red",
 "res://world assets/": "blue",
 "res://world scenes/": "yellow"

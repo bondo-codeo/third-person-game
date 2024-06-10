@@ -50,13 +50,19 @@ func stateManager():
 				#if not pressing running button but pressing WASD buttons walk
 	
 func sliding(delta):
-	if Input.is_action_just_pressed("slide") and not state == groundStates.idle and not state == groundStates.crouchingIdle and not state == groundStates.crouchWalking and not state == groundStates.sliding:
-		changeState(groundStates.sliding)
-		slideTimer = slideTimerMax
+	if Input.is_action_just_pressed("slide") and (state == groundStates.running or state == groundStates.walking):
+		if state == groundStates.running:
+			changeState(groundStates.sliding)
+			slideTimer = slideTimerMax + 0.4
+		else:
+			changeState(groundStates.sliding)
+			slideTimer = slideTimerMax 
+		print("slide start")
 	if slideTimer > 0.0:
 		slideTimer -= delta
 	if slideTimer <= 0.0 and state == groundStates.sliding:
 		changeState(groundStates.slideSwitch)
+		print("slide end")
 
 func crouchCheck():
 	if crouchCast.is_colliding() and not state == groundStates.sliding:

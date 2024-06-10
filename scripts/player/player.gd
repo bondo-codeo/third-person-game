@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var character = $baseCharacter
 
 @export var humanClass : humanoid
+
 @onready var standingCol = $standingCol
 @onready var crouchingCol = $crouchingCol
 
@@ -47,11 +48,15 @@ func _input(event):
 func _physics_process(delta):
 	applyGravity(delta)
 	jump()
-	var input_dir = Input.get_vector("left", "right", "forward", "backward")
-	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), humanClass.lerpDrag * delta)
-	currentState = stateManager.state
 	
+	
+	var input_dir = Input.get_vector("left", "right", "forward", "backward")
+	direction = transform.basis * Vector3(input_dir.x, 0, input_dir.y).normalized()
+	currentState = stateManager.state
 	character.rotateTorso(head.rotation.x, delta)
+	
+	if Input.is_action_just_pressed("fire"):
+		character.hit()
 	
 	stateMatching(direction, delta)
 	guiManagement()
@@ -95,8 +100,8 @@ func stateMatching(dir, delta):
 			character.run()
 	
 		stateManager.groundStates.crouchingIdle:
-			velocity.x = lerp(velocity.x, dir.x * humanClass.crouchSpeed, humanClass.lerpDrag * delta)
-			velocity.z = lerp(velocity.z, dir.z * humanClass.crouchSpeed, humanClass.lerpDrag * delta)
+			velocity.x = lerp(velocity.x, 0.0, humanClass.lerpDrag * delta)
+			velocity.z = lerp(velocity.z, 0.0, humanClass.lerpDrag * delta)
 			head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
 			camera.fov = lerp(camera.fov, crouchingFov, cameraLerp)
 			standingCol.disabled = true
@@ -113,10 +118,10 @@ func stateMatching(dir, delta):
 			character.crouchWalk()
 	
 		stateManager.groundStates.sliding:
-			head.position.y = lerp(head.position.y, crouchHeight, cameraLerp)
 			camera.fov = lerp(camera.fov, slidingFov, cameraLerp)
 			standingCol.disabled = true
 			crouchingCol.disabled = false
+			character.slide()
 
 func cameraZoom():
 	if Input.is_action_just_released("scrollUp") and camSpring.spring_length > 1.4:

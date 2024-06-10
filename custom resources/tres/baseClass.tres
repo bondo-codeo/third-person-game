@@ -9,6 +9,6 @@ health = 150
 walkSpeed = 5
 crouchSpeed = 2
 runSpeed = 7
-slideSpeed = 15
+slideSpeed = 10
 jumpPower = 4
 lerpDrag = 20

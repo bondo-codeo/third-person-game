@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_tjvnd"]
 [ext_resource type="Texture2D" uid="uid://caany73wvw2jo" path="res://textures/dark/texture_02.png" id="2_cbpri"]
-[ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://player scenes/character.tscn" id="4_xg7cc"]
+[ext_resource type="PackedScene" uid="uid://cx8df2xm2muud" path="res://player/base class/player.tscn" id="4_xg7cc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_354yv"]
 sky_top_color = Color(0.4, 0.54902, 0.654902, 1)
