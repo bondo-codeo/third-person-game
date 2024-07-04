@@ -36,7 +36,7 @@ var cameraLerp = 0.5
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	 
+
 func _input(event):
 	#mouse rotation
 	if event is InputEventMouseMotion:
