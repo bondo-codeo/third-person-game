@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cmoqkdat8dxw"
+path="res://.godot/imported/dbz0k50-ab4e44e3-a6d2-4ab8-8929-1a4d3def7053.png-52846c573d772efc23dd9bd62f248e28.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://custom blender character norig/dbz0k50-ab4e44e3-a6d2-4ab8-8929-1a4d3def7053.png"
+dest_files=["res://.godot/imported/dbz0k50-ab4e44e3-a6d2-4ab8-8929-1a4d3def7053.png-52846c573d772efc23dd9bd62f248e28.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1
